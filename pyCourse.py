@@ -90,3 +90,17 @@ for key, value in d.items():
 for value in d.values():
     print(value)
 
+# pass a syntax placeholder to avoid syntax error
+x = [23, 4, 21]
+for item in x:
+    # avoid syntax error
+    pass
+print('end')
+
+myString = "Georgi"
+for letter in myString:
+    if letter == "e":
+        # go ahead and go back to the loop
+        continue
+    print(letter)
+
