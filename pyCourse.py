@@ -257,11 +257,15 @@ celcius = [0, 12, 23, 22]
 fahrenheit = [((9/5)*temp + 32) for temp in celcius]
 print(fahrenheit)
 
+
+
 # readibility and reproducibility - the most important
 
-# use if and else statement inside of a list comprehension 
+# use IF AND ELSE statement INSIDE OF A LIST COMPREHENSION
 results = [x if x % 2 == 0 else 'ODD' for x in range(45, 87)]
 print(results)
+
+
 
 
 # nested loops in a list comprehension
@@ -278,4 +282,44 @@ print('\n')
 myList = [x*y for x in [8, 12, 14] for y in [1, 10, 100]]
 print(myList)
 
+print('\n'*2)
 
+
+
+# revision of statements 
+
+# print words that start with 's'
+st = 'Print only the words that start with s in this sentence'
+splitSt = st.split()
+for word in splitSt:
+    if word[0].lower() == 's':
+        print(word)
+print('\n')
+
+
+# list comprehension to create a list of all numbers between 1 and 50 that are divisible by 3
+listComp = [num for num in range(1, 50) if num % 3 == 0]
+print(listComp)
+print('\n')
+
+
+# print words of even length
+st = 'Print every word in this sentence that has an even number of letters'
+for word in st.split():
+    if len(word) % 2 != 0:
+        print(word)
+
+print('\n')
+
+
+# FizzBuzz
+fizzbuzz = ['FizzBuzz' if num % 3 == 0 and num % 5 == 0 else 'Fizz' if num % 3 == 0 else 'Buzz' if num % 5 == 0 else num for num in range(1, 101)]
+print(fizzbuzz)
+
+print('\n')
+
+
+# list comprehension to create a list of the first letters of every word in the string 
+st = 'Create a list of the first letters of every word in this string'
+firstLetters = [word[0] for word in st.split()]
+print(firstLetters)
