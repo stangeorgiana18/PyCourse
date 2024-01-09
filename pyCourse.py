@@ -104,3 +104,178 @@ for letter in myString:
         continue
     print(letter)
 
+
+print(list(range(0, 15, 3)))
+
+indexCount = 0
+for letter in 'longnumber':
+    print('at index {} the letter is {}'.format(indexCount, letter))
+    indexCount += 1
+
+# replicate the above loop using enumerate
+
+indexCount = 0
+word = 'heyheyhey'
+for letter in word:
+    print(word[indexCount])
+    indexCount += 1
+
+# enumerate returns the index counter and 
+# the object itself or element at that particular iteration
+    
+word = 'yupy'
+for item in enumerate(word):
+    print(item) # output: index count automatically in the form of tuples
+
+# further, tuple unpacking
+word = 'beauty'
+for index, letter in enumerate(word):
+    print(index)
+    print(letter)
+    print('\n')
+
+# the opposite of enumerate - the zip functions
+# zip together 2 lists
+    
+myList1 = [13, 23, 43, 64, 78, 98]
+myList2 = ['u', 'd', 'p', 's']
+myList3 = [234, 343, 832, 901]
+
+for item in zip(myList1, myList2, myList3):
+    # zip together the lists and pair up the items
+    print(item) # obtain list of tuples
+
+# if the lists are uneven, zip will only be able to go
+# and zip together as far as the list which is the shortest
+
+# obtain the zip list itself 
+print(list(zip(myList1, myList2, myList3)))
+
+# [(13, 'u', 234), (23, 'd', 343), (43, 'p', 832), (64, 's', 901)]
+
+# unpack the tuples again
+for a, b, c in zip(myList1, myList2, myList3):
+    print(b) # elements of the second list
+
+
+
+# the in operator 
+print('x' in ['x', 'y', 'z'])
+
+print('a' in 'final')
+
+# the in operator works in dictionaries as well
+print('mykey' in {'mykey': 7887})
+
+d = {'mykey': 7887}
+print(7887 in d.values())
+print(7887 in d.keys())
+
+# min, max and random numbers
+myList = [13, 24, 4656, 345]
+print(min(myList))
+print(max(myList))
+
+
+
+from random import shuffle
+
+myList = [39, 90, 290, 230, 123]
+
+shuffle(myList) # it does not return anything
+print(myList)
+
+print(type(shuffle(myList))) # none tyoe
+# shuffle is an in-place function - operated in-place on the list
+
+
+
+# grab a random integer 
+
+from random import randint
+
+print(randint(0, 100))
+print(randint(0, 100))
+
+randomNumber = randint(220, 323)
+print(randomNumber)
+
+# accept user input with the input function - accepts only strings
+answer = input('do you remember this?: ')
+print(answer)
+
+number = input('numbers are returned as strings too: ')
+print(number)
+print(type(number)) # str
+
+# transform the result (number) in other data type 
+print(float(number))
+print(int(number))
+
+number = int(input('other number: '))
+print(number)
+print(type(number))
+
+
+# list comprehension 
+# good alternative to for loop along with .append() to create a list
+
+myString = 'walnut'
+myList = []
+# make a list of every character
+
+for letter in myString:
+    myList.append(letter)
+print(myList)
+
+print('\n')
+
+
+# using list comprehension, but computationally the same 
+# essentially it's a flattened out for loop
+# letter + the for first line
+# [take element for element in other iterable object]
+
+myList = []
+myList = [letter for letter in myString]
+print(myList)
+
+myList = [eat for eat in 'chocolate']
+print(myList)
+
+# perfom operations on the first variable name
+myList = [num**2 for num in range(23, 34, 2)]
+print(myList)
+
+
+myList = [x**2 for x in range(22, 90) if x % 2 == 0]
+print(myList)
+
+print('\n')
+
+celcius = [0, 12, 23, 22]
+fahrenheit = [((9/5)*temp + 32) for temp in celcius]
+print(fahrenheit)
+
+# readibility and reproducibility - the most important
+
+# use if and else statement inside of a list comprehension 
+results = [x if x % 2 == 0 else 'ODD' for x in range(45, 87)]
+print(results)
+
+
+# nested loops in a list comprehension
+myList = []
+for x in [8, 12, 14]:
+    for y in [1, 10, 1000]:
+        myList.append(x*y)
+
+print(myList)
+
+print('\n')
+
+# othewise the above
+myList = [x*y for x in [8, 12, 14] for y in [1, 10, 100]]
+print(myList)
+
+
