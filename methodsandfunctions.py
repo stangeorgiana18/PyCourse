@@ -518,9 +518,7 @@ print('\n')
 
 # LAMBDA EXPRESSIONS
 
-def square(num): 
-    result = num ** 2
-    return result
+def square(num): return num ** 2
 
 print(square(3))
 
