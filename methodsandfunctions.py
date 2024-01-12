@@ -210,4 +210,242 @@ def myfunc(string):
 
 print(myfunc('Anthropomorphism'))
 
+print('\n')
 
+# function practice exercises
+
+def animal_crackers(text):
+    list_words = text.lower().split()
+    return list_words[0][0] == list_words[1][0]
+
+
+print(animal_crackers('Levelheaded Lama'))
+print(animal_crackers('Crazy cat'))
+print('\n')
+
+def makes_twenty(n1, n2):
+    return (n1+n2) == 20 or n1 == 20 or n2 == 20
+
+print(makes_twenty(10, 10))
+print(makes_twenty(2, 3))
+print('\n')
+
+
+def old_macdonald(name):
+    first_letter = name[0]
+    inbetween = name[1:3]
+    fourth_letter = name[3]
+    rest = name[4:]
+
+    return first_letter.upper() + inbetween + fourth_letter.upper() + rest
+
+print(old_macdonald('macdonald'))
+
+
+def old_macdonald(name):
+    first_half = name[:3]
+    second_half = name[3:]
+    return first_half.capitalize() + second_half.capitalize() # capitalize both strings
+
+print(old_macdonald('macdonald'))
+print('\n')
+
+
+def master_yoda(text):
+    inverse_text = ''
+    list_words = text.split()
+    reverse_word_list = list_words[::-1]
+    return ' '.join(reverse_word_list) # print the string with the words from the list joined
+
+print(master_yoda('I am home'))
+print('\n')
+
+
+def almost_there(n):
+    return (abs(100 - n) <= 10) or (abs(200 - n) <= 10)
+
+print(almost_there(104))
+print(almost_there(150))
+print('\n')
+
+
+def has_33(nums):
+    for i in range(0, len(nums) - 1):
+        if nums[i] == 3 and nums[i+1] == 3:
+            return True
+    return False
+
+print('results for has_33:')
+print(has_33([1, 3, 3]))
+print(has_33([1, 3, 1, 3]))
+print('\n')
+
+
+# or slice the list with nums[i:i+2]:
+def has_33(nums):
+    for i in range(0, len(nums) - 1):
+        if nums[i:i+2] == [3, 3]:
+            return True
+    return False
+
+print(has_33([1, 3, 3]))
+print(has_33([1, 3, 1, 3]))
+print('\n')
+
+
+def paper_doll(text):
+    new_text = ''
+    for char in text:
+        new_text += char*3
+    return new_text
+
+print(paper_doll('Hello'))
+print('\n')
+
+
+def blackjack(a, b, c):
+    if sum([a, b, c]) <= 21: 
+        return sum([a, b, c])
+    elif 11 in [a, b, c] and sum([a, b, c]) <= 31:
+        return sum([a, b, c]) - 10
+    else:
+        return 'BUST'
+        
+print(blackjack(5,6,7))
+print(blackjack(9, 9, 9))
+print('\n')
+
+# a tricky one
+
+def summer_69(arr):
+
+    total = 0
+    add = True
+    
+    for num in arr:
+        while add:
+            if num != 6:
+                total += num
+                break
+            else:
+                add = False
+        while not add:
+            if num != 9:
+                break
+            else:
+                add = True
+                break
+
+    return total
+
+print('summer_69:')
+print(summer_69([2, 1, 6, 9, 11]))
+print(summer_69([4, 5, 6, 7, 8, 9]))
+print('\n')
+
+
+# true if the list of integers contains 007 in order,
+# not necessarily on consecutive positions
+
+def spy_game(nums):
+
+    code = [0, 0, 7, 'x']
+    # [0, 7, 'x']
+    # [7, 'x']
+    # ['x'] length = 1
+    for num in nums:
+        if num == code[0]:
+            code.pop(0)  # pop off the first item
+
+    return len(code) == 1
+
+print('spy_game:')
+print(spy_game([1,2,4,0,0,7,5]))
+print(spy_game([1,0,2,4,0,5,7]))
+print(spy_game([1,7,2,0,4,5,0]))
+print('\n')
+
+
+
+##############################################
+# USE OF FOR ELSE STATEMENT - unique in python
+##############################################
+
+def count_primes(num):
+
+    # check for 0 or 1 input
+    if num < 2: 
+        return 0
+    ##############
+    # 2 or greater
+    ##############
+
+    # clever trick
+    # store our prime numbers 
+    primes = [2]
+    # counter going up to the input num
+    # if I start off with 3 I can make the step size 2
+    x = 3
+
+    # x is going through every number up to the input number
+    while x <= num:
+        # check if x is prime
+        for y in range(3, x, 2):
+            if x % y == 0:
+                x += 2
+                break
+        # else aligned with for because I have a break inside the for
+        else:
+            primes.append(x)
+            x += 2
+    print(primes)
+    return len(primes)
+
+print('count_primes:')
+print(count_primes(100))
+
+
+# another way:
+def count_primes(num):
+    
+    if num < 2: 
+        return 0
+    
+    primes = [2]
+    x = 3
+
+    while x <= num:
+        for y in primes:
+            if x % y == 0:
+                x += 2
+                break
+        else:
+            primes.append(x)
+            x += 2
+    print(primes)
+    return len(primes)
+
+print(count_primes(100))
+print('\n')
+
+
+
+# print out function that takes in a single letter
+
+def print_big(letter):
+    patterns = {1:'  *  ',2:' * * ',3:'*   *',4:'*****',5:'**** ',6:'   * ',7:' *   ',8:'*   * ',9:'*    '}
+    alphabet = {'A':[1,2,4,3,3],'B':[5,3,5,3,5],'C':[4,9,9,9,4],'D':[5,3,3,3,5],'E':[4,9,4,9,4]}
+    for pattern in alphabet[letter.upper()]:
+        print(patterns[pattern])
+
+print('print_big:')
+print_big('a')
+      
+
+
+
+
+
+
+
+        
