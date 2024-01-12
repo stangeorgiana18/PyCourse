@@ -518,8 +518,40 @@ print('\n')
 
 # LAMBDA EXPRESSIONS
 
-lambda num: num ** 2
+# assign lambda function to square
+# but typically you don't name them
+# instead you'll use it in conjunction with other functions - map and filter
 
-print(square(3))
+square = lambda num: num ** 2
 
-        
+print(square(5))
+
+# if I intend to use a function only one time, better not to define it 
+# so it won't take up unnecessary space
+
+# convert square function into lambda expression
+
+print('lamba function 1:')
+result = list(map(lambda num: num ** 2, my_nums))
+print(result)
+print('\n')
+
+
+# convert check_even function to lambda 
+
+print('lambda function 2:')
+result = list(filter(lambda num: num % 2 == 0, my_nums))
+print(result)
+print('\n')
+
+
+print(names)
+first_char = list(map(lambda name: name[0], names))
+print(first_char)
+print('\n')
+
+print('reversed names:')
+reversed_names = list(map(lambda name: name[::-1], names))
+print(reversed_names)
+print('\n')
+
