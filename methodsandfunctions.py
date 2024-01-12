@@ -555,3 +555,48 @@ reversed_names = list(map(lambda name: name[::-1], names))
 print(reversed_names)
 print('\n')
 
+
+
+
+
+# nested statements and scope
+x = 25
+
+def printer():
+    x = 50
+    return x
+
+print(printer())
+
+# LEGB - local, enclosing function locals, globals and built-in
+
+lambda num: num ** 2 # local variable
+
+name = 'this is a global string' # global
+
+def greet():
+
+    name = 'Geo' # enclosing
+
+    def hello():
+        name = "I'm a local"
+        print('hello ' + name)
+    
+    hello()
+
+greet()
+
+x = 29
+
+def func():
+    global x
+    print(f'x is {x}')
+
+    # local reassignment on a global variable
+    x = 'new value'
+    print(f'I just locally changed global x to {x}')
+
+func()
+print(x)
+
+
