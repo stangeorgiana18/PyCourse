@@ -73,18 +73,18 @@ print(items) # to inspect the number of variables
 
 # interactions between functions
 
-list = [1, 2, 3, 4, 5]
+my_list = [1, 2, 3, 4, 5]
 
 from random import shuffle
 
-shuffle(list)
-print(list)
+shuffle(my_list)
+print(my_list)
 
 def shuffle_list(myList):
     shuffle(myList)
     return myList
 
-result = shuffle_list(list)
+result = shuffle_list(my_list)
 print(result)
 
 
@@ -441,6 +441,80 @@ def print_big(letter):
 print('print_big:')
 print_big('a')
       
+
+
+
+##################################
+# Lambda functions 
+# anonymous one time use functions 
+# and then never referenced again
+###################################
+
+def square(num):
+    return num**2
+
+my_nums = [4, 7, 13, 14]
+
+# for map function you pass in the function that you want to map
+# to every single element or item in this list
+
+print(map(square, my_nums))
+# output: <map object at 0x104ef61d0> -> this is a memory location
+
+# iterate through the map function:
+# apply the square function to every item in my_nums / or any iterable
+for item in map(square, my_nums):
+    print(item)
+
+print('get the actual list:')
+print(list(map(square, my_nums)))
+print('\n')
+
+
+
+
+def splicer(mystring):
+    if len(mystring) % 2 == 0:
+        return 'Even'
+    else:
+        return mystring[0]
+
+names = ['Serban', 'Georgi', 'Laura']
+
+# pass the function without .() because map is going to execute it itself
+print(list(map(splicer, names)))
+
+
+
+
+
+
+#################################################################
+# FILTER function
+# returns an iterator yielding those items of the iterable
+# for which when you pass in the item into the function, it's true
+#################################################################
+
+# create a function that returns either true or false
+
+def check_even(num):
+    return num % 2 == 0
+
+my_nums = [12, 44, 64, 2, 3, 51]
+
+print(filter(check_even, my_nums))
+
+result = list(filter(check_even, my_nums))
+print(result)
+
+for n in filter(check_even, my_nums):
+    print(n)
+
+print('\n')
+
+
+
+
 
 
 
