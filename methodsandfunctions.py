@@ -585,18 +585,23 @@ def greet():
     hello()
 
 greet()
+print('\n')
 
 x = 29
 
-def func():
-    global x
+def func(x):
+
     print(f'x is {x}')
 
     # local reassignment on a global variable
     x = 'new value'
     print(f'I just locally changed global x to {x}')
+    return x
 
-func()
 print(x)
+x = func(x)
+
+print(x)
+
 
 
