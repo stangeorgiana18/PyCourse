@@ -602,6 +602,89 @@ print(x)
 x = func(x)
 
 print(x)
+print('\n')
+
+
+
+# functions and methods revision ex
+import math
+
+def vol(rad):
+    return 4/3 * math.pi * (rad ** 3)
+
+print(vol(2))
+print('\n')
+
+def ran_bool(num, low, high):
+    return low < num < high 
+
+print(ran_bool(5, 2, 7))
+print('\n')
+
+def up_low(s):
+    low = 0
+    up = 0
+    for char in s:
+        if char.islower():
+            low += 1
+        elif char.isupper():
+            up += 1
+    return f'number of upper case characters: {up}', f'number of lower case characters: {low}'
+
+s = 'Hello Mr. Rogers, how are you this fine Tuesday?'
+print(up_low(s))
+print('\n')
+
+
+def unique_list(lst):
+    new_lst = []
+    for n in lst:
+        if n not in new_lst:
+            new_lst.append(n)
+    return new_lst
+
+print(unique_list([1,1,1,1,2,2,3,3,3,3,4,5]))
+print('\n')
+
+def mutiply(numbers):
+    p = 1
+    for n in numbers:
+        p *= n 
+    return p
+
+print(mutiply([1, 2, 3, -4]))
+print('\n')
+
+
+def palindrome(s):
+    s_without_spaces = s.replace(" ", "")
+    reversed_s = s_without_spaces[::-1] 
+    # or: reversed_s = ''.join(s)
+    return s_without_spaces == reversed_s
+
+print(palindrome("nurses run"))
+print('\n')
+
+
+
+# PANGRAM 
+
+import string
+ 
+print(string.ascii_lowercase)
+
+def ispangram(str1, alphabet = string.ascii_lowercase):
+    str2 = ''
+    for char in str1:
+        if char not in str2:
+            str2 += char
+    set1 = set(str2)
+    set2 = set(alphabet)
+
+    return set1 == set2 or set2.issubset(set1)
+
+
+print(ispangram("The quick brown fox jumps over the lazy dog"))
 
 
 
