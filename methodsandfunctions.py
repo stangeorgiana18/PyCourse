@@ -450,6 +450,11 @@ print_big('a')
 # and then never referenced again
 ###################################
 
+
+############################
+# MAP functions
+############################
+
 def square(num):
     return num**2
 
@@ -615,11 +620,18 @@ def vol(rad):
 print(vol(2))
 print('\n')
 
-def ran_bool(num, low, high):
-    return low < num < high 
 
-print(ran_bool(5, 2, 7))
+def ran_bool(num, low, high):
+    if num in range(low, high + 1):
+        print(f'{num} is in range of {low} and {high}')
+    else:
+        print('not in range')
+
+
+ran_bool(5, 2, 5)
 print('\n')
+
+
 
 def up_low(s):
     low = 0
@@ -629,11 +641,40 @@ def up_low(s):
             low += 1
         elif char.isupper():
             up += 1
-    return f'number of upper case characters: {up}', f'number of lower case characters: {low}'
+        else: 
+            pass # '?' for eg
+
+    print(f'original string: {s}')
+    print(f'number of upper case characters: {up}')
+    print(f'number of lower case characters: {low}')
 
 s = 'Hello Mr. Rogers, how are you this fine Tuesday?'
-print(up_low(s))
+up_low(s)
 print('\n')
+
+# another way for the above 
+print('dicitionary method for up_low(s) function:')
+
+def up_low(s):
+    d = {'upper' : 0, 'lower' : 0} # for multiple things to keep track of
+    for char in s:
+        if char.islower():
+            d['lower'] += 1
+        elif char.isupper():
+            d['upper'] += 1
+        else: 
+            pass # '?' for eg
+
+    print(f'original string: {s}')
+    print(f'number of upper case characters: {d["upper"]}')
+    print(f'number of lower case characters: {d["lower"]}')
+
+s = 'Hello Mr. Rogers, how are you this fine Tuesday?'
+up_low(s)
+print('\n')
+
+
+
 
 
 def unique_list(lst):
@@ -646,6 +687,20 @@ def unique_list(lst):
 print(unique_list([1,1,1,1,2,2,3,3,3,3,4,5]))
 print('\n')
 
+
+# another way:
+# print the unique values of the list:
+
+def unique_list(lst):
+    return list(set(lst))
+
+print('the unique values of the list using set method:')
+print(unique_list([1,1,1,1,2,2,3,3,3,3,4,5]))
+print('\n')
+
+
+
+
 def mutiply(numbers):
     p = 1
     for n in numbers:
@@ -656,11 +711,38 @@ print(mutiply([1, 2, 3, -4]))
 print('\n')
 
 
+#####################
+# using reduce method 
+#####################
+
+from functools import reduce 
+
+def mutiply(numbers):
+    # way to convert each element to a positive element using map
+    # positive_numbers = map(abs, numbers)
+
+    # reduce method to multiply all the numbers
+    # cumulative operation of the elements
+    result = reduce(lambda x, y: x * y, numbers)
+
+    return result
+
+
+lst = [1, 2, 3, -4]
+print('using reduce and lambda to multiply elements from a list:')
+print(mutiply(lst))
+print('\n')
+
+
+
 def palindrome(s):
-    s_without_spaces = s.replace(" ", "")
-    reversed_s = s_without_spaces[::-1] 
+    # remove the spaces from the string
+    s = s.replace(" ", "")
+
+    reversed_s = s[::-1] 
     # or: reversed_s = ''.join(s)
-    return s_without_spaces == reversed_s
+
+    return s == reversed_s
 
 print(palindrome("nurses run"))
 print('\n')
@@ -672,19 +754,21 @@ print('\n')
 import string
  
 print(string.ascii_lowercase)
+print('\n')
 
 def ispangram(str1, alphabet = string.ascii_lowercase):
     str2 = ''
-    for char in str1:
-        if char not in str2:
-            str2 += char
-    set1 = set(str2)
-    set2 = set(alphabet)
+    # create a set of the alphabet
+    alphaset = set(alphabet)
+    # remove any spaces from the inout string
+    str1 = str1.replace(" ", "")
+    # convert into all lowercase
+    str1 = str1.lower()
+    # grab all unique letters from the string
+    str1 = set(str1)
 
-    return set1 == set2 or set2.issubset(set1)
+    return str1 == alphaset
 
 
 print(ispangram("The quick brown fox jumps over the lazy dog"))
-
-
 
