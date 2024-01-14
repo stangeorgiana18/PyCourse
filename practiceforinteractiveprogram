@@ -67,18 +67,21 @@ def user_choice():
 
     # inital
     choice = 'wrong'
-    acceptable_range = range(0, 10) # not accept 001 for eg
+    acceptable_range = range(0, 10) 
     within_range = False
 
     # two conditions to check
     # digit or within_range == False
+
+    # isdigit() returns True if all characters in the string are digits
     while not choice.isdigit() or not within_range:
         
         choice = input("enter a number (0-10): ")
 
         # digit check
-        if not choice.isdigit():
+        if not choice.isdigit() or (choice.startswith('0') and len(choice) > 1): # not accept 001 for eg
             print('this is not a digit!')
+            continue
 
         # range check
         if choice.isdigit():
