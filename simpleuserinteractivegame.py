@@ -6,7 +6,7 @@ def display_game(game_list):
     print("Here is the current list: ")
     print(game_list)
 
-display_game(game_list)
+#display_game(game_list)
 
 # get a position choice
 
@@ -36,7 +36,7 @@ def replacement_choice(game_list, position):
 
     return game_list
 
-print(replacement_choice(game_list, 1))
+#print(replacement_choice(game_list, 1))
 
 # make sure that is user is playing
 
