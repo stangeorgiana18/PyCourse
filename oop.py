@@ -67,7 +67,8 @@ class Circle():
         self.radius = radius
 
         # an attribute does not necessarily need to be defined from a particular parameter call
-        self.area = radius * radius * self.pi
+        # self.pi witten as Circle.pi because it's a class object attribute
+        self.area = radius * radius * Circle.pi
 
     # METHOD
     def get_circumference(self):
@@ -77,7 +78,8 @@ class Circle():
 my_circle = Circle(40)
 print(my_circle.radius)
 print(my_circle.get_circumference())
-print(my_circle.area)
+print(my_circle.area, '\n')
+
 
 
 
