@@ -13,18 +13,38 @@ print(type(mylist))
 # an instance = a specific object created from a particular class
 
 class Dog():
-    # init is a constructor for a class, 
-    # called automatically when creating an instance of the class
-    # self keyword is the instance of the object itself
-    def __init__(self, mybreed):
+
+    # CLASS OBJECT ATTRIBUTE
+    # SAME FOR ANY INSTANCE OF A CLASS
+    species = 'mammal'
+
+    '''
+    init is a constructor for a class, 
+    called automatically when creating an instance of the class
+    self keyword is the instance of the object itself
+    '''
+    def __init__(self, breed, name, spots):
        
        # ATTRIBUTES
        # we take in the argument
        # assign it using self.attribute_name
 
-       self.breed = mybreed
+       self.breed = breed
+       self.name = name
 
-my_dog = Dog(mybreed = 'Lab')
+       # expect boolean True/False
+       self.spots = spots
+
+    # OPERATIONS/Actions ---> Methods
+    def bark(self):
+        print("Woof!")
+        
+
+my_dog = Dog(breed = 'Lab', name = "Marley", spots = False)
 print(type(my_dog))
 
-print(my_dog.breed)
+print(my_dog.species)
+
+# methods - functions acting on an object, that take the object itself into account
+# through the use of self argument/keyword
+
