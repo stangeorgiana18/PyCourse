@@ -33,9 +33,9 @@ class Dog():
        self.name = name
 
     # OPERATIONS/Actions ---> Methods
-    def bark(self):
+    def bark(self, number):
         # name gets connected to the object through self kw
-        print("Woof! My name is {}".format(self.name))
+        print("Woof! My name is {} and the number is {}".format(self.name, number))
         
 
 my_dog = Dog('Huskie', "Marcel")
@@ -53,4 +53,31 @@ print(my_dog.name)
 # methods need to be executed
 # it is an action the object can take
 
-my_dog.bark()
+my_dog.bark(11)
+print('\n')
+
+
+class Circle():
+
+    # CLASS OBJECT ATTRIBUTE
+    pi = 3.14
+
+    def __init__(self, radius = 1):
+
+        self.radius = radius
+
+        # an attribute does not necessarily need to be defined from a particular parameter call
+        self.area = radius * radius * self.pi
+
+    # METHOD
+    def get_circumference(self):
+        return self.radius * self.pi * 2
+
+# the default value may always be overwritten
+my_circle = Circle(40)
+print(my_circle.radius)
+print(my_circle.get_circumference())
+print(my_circle.area)
+
+
+
