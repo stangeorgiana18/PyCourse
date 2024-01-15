@@ -261,4 +261,54 @@ del b
 # delete a book: del b
 # delete variable from the computer's memory
 
+print('\n')
+
+
+# revision exercises
+
+class Cylinder():
+
+    def __init__(self, height = 1, radius = 1):
+        self.height = height
+        self.radius = radius
+
+    def volume(self):
+        return 3.14 * (self.radius ** 2) * self.height
+    
+    def surface_area(self):
+        return 2 * 3.14 * self.radius * self.height + 2 * 3.14 * (self.radius ** 2)
+    
+
+c = Cylinder(2, 3)
+
+print(c.volume())
+print(c.surface_area(), '\n')
+
+
+import math 
+
+class Line():
+
+    def __init__(self, coor1, coor2):
+        self.coor1 = coor1
+        self.coor2 = coor2
+     
+    def distance(self):
+        (coor1_x, coor1_y) = self.coor1
+        (coor2_x, coor2_y) = self.coor2
+        return math.sqrt((coor2_x - coor1_x) ** 2 + (coor2_y - coor1_y) ** 2)
+    
+    def slope(self):
+        (coor1_x, coor1_y) = self.coor1
+        (coor2_x, coor2_y) = self.coor2
+        return (coor2_y - coor1_y) / (coor2_x - coor1_x)
+    
+
+coordinate1 = (3, 2)
+coordinate2 = (8, 10)
+
+li = Line(coordinate1, coordinate2)
+
+print(li.distance())
+print(li.slope())
 
