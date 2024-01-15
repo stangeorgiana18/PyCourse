@@ -115,6 +115,8 @@ class Dog(Animal):
 
 myanimal = Animal()
 
+# methods belong to the objects they act on
+
 myanimal.eat()
 myanimal.who_am_I()
 print('\n')
@@ -122,5 +124,64 @@ print('\n')
 mydog = Dog()
 mydog.who_am_I()
 mydog.bark()
+print('\n')
 
+
+# POLYMORPHISMS
+
+# the way in which diff object classes can share the same method name 
+
+class Dog():
+
+    def __init__(self, name):
+        self.name = name
+    
+    def speak(self):
+        return self.name + " says woof!"
+    
+class Cat():
+    
+    def __init__(self, name):
+        self.name = name
+    
+    def speak(self):
+        return self.name + " says meow!"
+
+carl = Dog("Carl")
+robin = Cat("Robin")
+
+print(carl.speak())
+print(robin.speak(), '\n')
+
+
+for pet in [carl, robin]:
+
+    print(type(pet))
+    print(pet.speak())
+
+
+print('\n')
+
+
+def pet_speak(pet):
+    print(pet.speak())
+
+pet_speak(carl)
+
+
+# ABSTRACT CLASSES 
+# never expect to be instantiated / create an instance from this class
+# designed to only serve as a base class
+
+class Animal():
+
+    def __init__(self, name):
+        self.name = name
+
+    def speak(self):
+        raise NotImplementedError("Subclass must implement this abstract method")
+    
+myanimal = Animal("chico")
+
+myanimal.speak()
 
