@@ -23,7 +23,7 @@ class Dog():
     called automatically when creating an instance of the class
     self keyword is the instance of the object itself
     '''
-    def __init__(self, breed, name, spots):
+    def __init__(self, breed, name):
        
        # ATTRIBUTES
        # we take in the argument
@@ -32,19 +32,25 @@ class Dog():
        self.breed = breed
        self.name = name
 
-       # expect boolean True/False
-       self.spots = spots
-
     # OPERATIONS/Actions ---> Methods
     def bark(self):
-        print("Woof!")
+        # name gets connected to the object through self kw
+        print("Woof! My name is {}".format(self.name))
         
 
-my_dog = Dog(breed = 'Lab', name = "Marley", spots = False)
+my_dog = Dog('Huskie', "Marcel")
 print(type(my_dog))
 
 print(my_dog.species)
+print(my_dog.name)
 
 # methods - functions acting on an object, that take the object itself into account
 # through the use of self argument/keyword
 
+# attributes don't have parantheses -> they are not executed 
+# they are just sth characteristic to the object that you call back
+
+# methods need to be executed
+# it is an action the object can take
+
+my_dog.bark()
