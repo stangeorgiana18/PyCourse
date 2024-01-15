@@ -202,9 +202,63 @@ bob = Dog("Bob")
 puf = Cat("Puf")
 
 print(bob.speak())
-print(puf.speak())
+print(puf.speak(), '\n')
 
 # eg of polymorphism
 # a general open file function that take in all 
 # the classes that you have and call .open on them
 # it's up to the class itself the actual type of files being opened
+
+
+
+# SPECIAL METHODS / MAGIC METHODS / DUNDER METHODS
+
+# use built in functions with user-defines objects
+
+mylist = [1, 2, 3]
+
+len(mylist)
+
+class Sample():
+    pass
+
+mysample = Sample()
+print(mysample, '\n')
+
+
+class Book():
+
+    def __init__(self, title, author, pages):
+
+        self.title = title
+        self.author = author
+        self.pages = pages
+
+    # if there's ever a function that asks for a string representation of your book class
+    # then it's going to return what this method returns 
+    def __str__(self):
+        return f"{self.title} by {self.author}"
+    
+    # return the length of user-defined objects
+    def __len__(self):
+        return self.pages
+    
+    def __del__(self):
+        print("A book object has been deleted.")
+
+
+b = Book("Evrika", 'Geo', 345) 
+
+# print fucnction asks what's the string representation of b
+print(b) 
+
+print(str(b))
+
+print(len(b), '\n')
+
+del b
+
+# delete a book: del b
+# delete variable from the computer's memory
+
+
