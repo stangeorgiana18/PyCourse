@@ -82,4 +82,45 @@ print(my_circle.area, '\n')
 
 
 
+# INHERITANCE AND POLYMORPHISM
+
+# inheritance => new classes from already defined classes
+# use: to reuse code and to reduce the complecity of the program
+
+# base class
+class Animal():
+
+    def __init__(self):
+        print('Animal created')
+    
+    def who_am_I(self):
+        print("I am an animal")
+    
+    def eat(self):
+        print("I am eating")
+
+class Dog(Animal):
+    
+    def __init__(self):
+        Animal.__init__(self)
+        print('Dog created')
+
+    # overwrite an older method
+    def who_am_I(self):
+        print("I am a dog")
+
+    def bark(self):
+        print('Woof!')
+    
+
+myanimal = Animal()
+
+myanimal.eat()
+myanimal.who_am_I()
+print('\n')
+
+mydog = Dog()
+mydog.who_am_I()
+mydog.bark()
+
 
