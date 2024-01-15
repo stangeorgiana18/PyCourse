@@ -331,6 +331,48 @@ myobj = Simple(300)
 print(myobj.value)
 
 print(myobj.add_to_value(500))
-print(myobj.value)
+print(myobj.value, '\n')
 
 
+# bank account class
+
+class Account():
+
+    def __init__(self, owner, balance = 0):
+        self.owner = owner
+        self.balance = balance
+
+    def deposit(self, deposit):
+        self.balance += deposit
+        print(f"Deposit Accepted: added ${deposit} to the balance.")
+
+    def withdraw(self, withdrawal):
+        if self.balance < withdrawal:
+            print("Funds Unavailable!")
+        else:
+            self.balance -= withdrawal
+            print("Withdrawal accepted!")
+
+    def __str__(self):
+        return f"Account owner: {self.owner} \nAccount balance: ${self.balance}"
+    
+
+# 1. Instantiate the class
+acct1 = Account('Geo', 400)
+
+# 2. Print the object
+print(acct1)
+
+# 3. Show the account owner attribute
+print(acct1.owner)
+
+# 4. Show the account balance attribute
+print(acct1.balance)
+
+# 5. Make a series of deposits and withdrawals
+acct1.deposit(50)
+
+acct1.withdraw(75)
+
+# 6. Make a withdrawal that exceeds the available balance
+acct1.withdraw(500)
