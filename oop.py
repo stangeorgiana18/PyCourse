@@ -285,23 +285,22 @@ print(c.volume())
 print(c.surface_area(), '\n')
 
 
-import math 
 
 class Line():
 
     def __init__(self, coor1, coor2):
-        self.coor1 = coor1
-        self.coor2 = coor2
+        self.coor1_x = coor1[0]
+        self.coor1_y = coor1[1]
+        self.coor2_x = coor2[0]
+        self.coor2_y = coor2[1]
      
     def distance(self):
-        (coor1_x, coor1_y) = self.coor1
-        (coor2_x, coor2_y) = self.coor2
-        return math.sqrt((coor2_x - coor1_x) ** 2 + (coor2_y - coor1_y) ** 2)
+    
+        return ((self.coor2_x - self.coor1_x) ** 2 + (self.coor2_y - self.coor1_y) ** 2) ** 0.5
     
     def slope(self):
-        (coor1_x, coor1_y) = self.coor1
-        (coor2_x, coor2_y) = self.coor2
-        return (coor2_y - coor1_y) / (coor2_x - coor1_x)
+        
+        return (self.coor2_y - self.coor1_y) / (self.coor2_x - self.coor1_x)
     
 
 coordinate1 = (3, 2)
