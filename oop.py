@@ -67,7 +67,7 @@ class Circle():
         self.radius = radius
 
         # an attribute does not necessarily need to be defined from a particular parameter call
-        # self.pi witten as Circle.pi because it's a class object attribute
+        # self.pi written as Circle.pi because it's a class object attribute
         self.area = radius * radius * Circle.pi
 
     # METHOD
@@ -130,6 +130,9 @@ print('\n')
 # POLYMORPHISMS
 
 # the way in which diff object classes can share the same method name 
+# allowing you to call those same methods names without worrying about a 
+# specific class that's being passed in
+
 
 class Dog():
 
@@ -167,6 +170,7 @@ def pet_speak(pet):
     print(pet.speak())
 
 pet_speak(carl)
+print('\n')
 
 
 # ABSTRACT CLASSES 
@@ -181,7 +185,26 @@ class Animal():
     def speak(self):
         raise NotImplementedError("Subclass must implement this abstract method")
     
-myanimal = Animal("chico")
 
-myanimal.speak()
+class Dog(Animal):
+    
+    def speak(self):
+        return self.name + " says woof!"
+    
 
+class Cat(Animal):
+    
+    def speak(self):
+        return self.name + " says meow!"
+    
+
+bob = Dog("Bob")
+puf = Cat("Puf")
+
+print(bob.speak())
+print(puf.speak())
+
+# eg of polymorphism
+# a general open file function that take in all 
+# the classes that you have and call .open on them
+# it's up to the class itself the actual type of files being opened
