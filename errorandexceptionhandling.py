@@ -40,8 +40,5 @@ def ask_for_int():
         else:
             print("Yes, thank you for the integer.")
             break
-        finally:
-            print("End of try/except/finally.")
-            print("I am going to ask you again.")
-
+        
 ask_for_int()
