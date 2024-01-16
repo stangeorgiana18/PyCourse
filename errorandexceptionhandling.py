@@ -17,17 +17,31 @@ else:
 
 
 # see built-in exceptions in the documentation
-# specific excepts for specific errors:
+# usual blocks:
     
 try:
     f = open("testfile", 'r')
     f.write("Ce interesant")
-except TypeError:
-    print("There was a type error!")
-except OSError:
-    # if opening a file you don't have permission to
-    print("You have an OS Error")
+except:
+    print("All other exceptions!")
 finally:
     # execute no matter what
     print("I always run.")
 
+
+def ask_for_int():
+
+    while True:
+        try:
+            result = int(input("Provide a number: "))
+        except:
+            print("That is not a number.")
+            continue
+        else:
+            print("Yes, thank you for the integer.")
+            break
+        finally:
+            print("End of try/except/finally.")
+            print("I will always run at the end.")
+
+ask_for_int()
