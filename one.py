@@ -1,14 +1,11 @@
 # python one.py
-print('hello')
 
-# built-in variable 
-# py does this in the background:
-# it assigns the string to the name variable when run directly
-# __name__ = "__main__"
+def func():
+    print("Func() in one.py")
 
-def myfunc():
-    pass
+print("Top level in one.py")
 
-# the way to organize the code at the bottom based on what you want to execute
-if __name__ == "__main__":
-    myfunc()
+if __name__ == '__main__':
+    print("one.py is being run directly!")
+else:
+    print("one.py has been imported!")
