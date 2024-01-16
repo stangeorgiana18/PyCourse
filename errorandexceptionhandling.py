@@ -17,8 +17,10 @@ else:
 
 
 # see built-in exceptions in the documentation
+# specific excepts for specific errors:
+    
 try:
-    f = open("testfile", 'w')
+    f = open("testfile", 'r')
     f.write("Ce interesant")
 except TypeError:
     print("There was a type error!")
