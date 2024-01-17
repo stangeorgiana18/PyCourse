@@ -1,10 +1,15 @@
-# pylint library - reports back possible issues, eg. styling issues, invalid code
-# unittest library - built-in, check for desired outputs
+'''
+A very simple script 
+'''
 
-a = 1
-b = 2
-print(a)
-print(B)
+def myfunc():
 
-# to see the report in the terminal:
-# pylint unittesting.py -r y
+    '''
+    A simple function
+    '''
+    first = 1
+    second = 2
+    print(first)
+    print(second)
+
+myfunc()
