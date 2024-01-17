@@ -1,4 +1,4 @@
-# create a card class
+# create a CARD CLASS
 # understand the suit, rank, value of the card
 
 import random
@@ -22,20 +22,51 @@ class Card:
     
 two_hearts = Card("Hearts", "Two")
 
-print(two_hearts)
 
-print(two_hearts.rank, two_hearts.suit)
-
-print(values[two_hearts.rank])
-
-three_of_clubs = Card("Clubs", "Three")
-
-print(three_of_clubs.value)
-
-print(three_of_clubs.value > three_of_clubs.value)
+# print(two_hearts)
+# print(two_hearts.rank, two_hearts.suit)
+# print(values[two_hearts.rank])
+# three_of_clubs = Card("Clubs", "Three")
+# print(three_of_clubs.value)
+# print(three_of_clubs.value > three_of_clubs.value)
 
 
-# deck class 
+# DECK CLASS 
+
+# instantiate the class
+
+class Deck():
+
+    def __init__(self):
+        # user input unrequired, every new deck should be the same
+        # as the previous instance of a deck previously instantiated
+        self.all_cards = []
+
+        for suit in suits:
+            for rank in ranks:
+                # create the card object
+                created_card = Card(suit, rank) # create a new deck
+
+                self.all_cards.append(created_card)
+
+    def shuffle(self):
+        # internally shuffle all the cards
+        random.shuffle(self.all_cards) 
+
+
+new_deck = Deck()
+first_card = new_deck.all_cards[0]
+print(first_card) # Two of Hearts
+bottom_card = new_deck.all_cards[-1]
+print(bottom_card) # Ace of Clubs
+
+# print all the cards 
+# all_cards hold various card objects, which recalled, return their rank and suit
+for card_object in new_deck.all_cards:
+    print(card_object)
+
+new_deck.shuffle()
+print(new_deck.all_cards[-1]) # Six of Clubs for eg.
 
 
 # player 
