@@ -50,10 +50,15 @@ class Deck():
                 self.all_cards.append(created_card)
 
     def shuffle(self):
-        # internally shuffle all the cards
+        # internally shuffle all the cards; shuffle doesn't return anything
         random.shuffle(self.all_cards) 
 
+    def deal_one(self):
+        # grab one card from somewhere in the list
+        return self.all_cards.pop()
 
+
+'''
 new_deck = Deck()
 first_card = new_deck.all_cards[0]
 print(first_card) # Two of Hearts
@@ -62,11 +67,20 @@ print(bottom_card) # Ace of Clubs
 
 # print all the cards 
 # all_cards hold various card objects, which recalled, return their rank and suit
+
 for card_object in new_deck.all_cards:
     print(card_object)
 
 new_deck.shuffle()
 print(new_deck.all_cards[-1]) # Six of Clubs for eg.
+'''
+
+new_deck = Deck()
+new_deck.shuffle()
+mycard = new_deck.deal_one()
+print(mycard) # Five of Diamonds
+print(len(new_deck.all_cards)) # 51 now
+
 
 
 # player 
