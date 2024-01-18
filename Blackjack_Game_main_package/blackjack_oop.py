@@ -48,7 +48,7 @@ test_deck.shuffle()
 print(test_deck)
 print('\n')
 
-
+# representation of a player 
 class Hand:
 
     def __init__(self):
@@ -91,7 +91,7 @@ pulled_card = test_deck.deal()
 print(pulled_card)
 test_player.add_card(pulled_card)
 test_player.add_card(pulled_card)
-print(test_player.value)
+print(test_player.value, '\n')
 
 # see what those cards are 
 for card in test_player.cards:
@@ -99,8 +99,8 @@ for card in test_player.cards:
 
 class Chips:
 
-    def __init__(self):
-        self.total = 100 # this can be set to a default value or supplied by a user input
+    def __init__(self, total = 100):
+        self.total = total # this can be set to a default value or supplied by a user input
         self.bet = 0 # bet value in chips
 
     def win_bet(self):
@@ -111,23 +111,86 @@ class Chips:
 
 
 # function for taking bets
-def take_bet():
+def take_bet(chips):
 
     while True:
         try:
-            bet = int(input("How many chips are you betting on?"))
-            if bet <= Chips.total:
-                return bet
+            chips.bet = int(input("How many chips are you betting on?"))
         except:
-            print("You don't have enough chips! Try betting on less.")
-        
+            print("Provide an integer.")
+        else:
+            # if they provided an integer 
+            if chips.bet > chips.total:
+                print("You don't have enough chips! You have {}".format(chips.total))
+            else:
+                break
+
 
 # function for taking hits
 # called during gameplay anytime a player requests a hit
 # or a Dealer's hand is less than 17
 def hit(deck, hand):
-    pass
+    
+    single_card = deck.deal()
+    hand.add_card(single_card)
+    hand.adjust_for_ace()
 
+
+# assign playing as a global variable
+def hit_or_stand(deck, hand):
+    global playing
+
+    while True:
+        x = input("Hit or Stand? Enter h or s: ")
+
+        if x[0].lower() == 'h':
+            hit(deck, hand)
+
+        elif x[0].lower() == 's':
+            print("Player Stands Dealer's Turn.")
+            playing = False
+
+        else:
+            print("I didn't understand that, please enter h or s only!")
+            continue
+        break
+
+
+# functions to display cards
+# When the game starts, and after each time Player takes a card,
+# the dealer's first card is hidden and all of Player's cards are visible
+# At the end of the hand all cards are shown, and you may want to show each hand's total value
+    
+def show_some(player, dealer):
+
+    # dealer.cards[1]
+
+    # show only ONE of the dealer's hand
+    print("\n Dealer's Hand: ")
+    print("First card hidden!")
+    print(dealer.cards[1])
+
+    # show all (2 cards) of the player's hand/cards
+    print("\n Player's Hand: ")
+    for card in player.cards:
+        print(card)
+
+
+def show_all(player, dealer):
+
+    # show all the dealer's cards
+    print("\n Dealer's Hand: ")
+    for card in dealer.cards:
+        print(card)
+
+    # calculate and display value (Jack + King == 20)
+    print(f"Value of Dealer's hand is: {dealer.value}")
+
+    # show all the player's cards
+    print("\n Player's Hand: ")
+    for card in player.cards:
+            print(card)
+    print(f"Value of Player's hand is: {dealer.value}")
 
 
 
