@@ -183,6 +183,12 @@ def show_all(player, dealer):
     for card in dealer.cards:
         print(card)
 
+    '''
+    savvy way with * --> loop through every item and print it out:
+
+    print("\n Dealer's hand: ", *dealer.cards, sep = '\n')
+    '''
+
     # calculate and display value (Jack + King == 20)
     print(f"Value of Dealer's hand is: {dealer.value}")
 
@@ -190,7 +196,34 @@ def show_all(player, dealer):
     print("\n Player's Hand: ")
     for card in player.cards:
             print(card)
+
     print(f"Value of Player's hand is: {dealer.value}")
 
+# example of * use in looping instead of for 
+# functionality inside the print function
+items = [1, 2, 3]
+print("Items are: ", *items, sep = '\n')
 
 
+# functions to handle end of game scenarios
+
+
+def player_busts(player, dealer, chips):
+    print("BUST PLAYER!")
+    chips.lose_bet()
+
+def player_wins(player, dealer, chips):
+    print("PLAYER BUSTS!")
+    chips.win_bet()
+
+def dealer_busts(player, dealer, chips):
+    print("PLAYER BUSTS! DEALER BUSTED!")
+    chips.win_bet()
+
+def dealer_wins(player, dealer, chips):
+    print("DEALER WINS!")
+    chips.lose_bet()
+
+# when both players get 21
+def push(player, dealer):
+    print("Dealer and Player tie! PUSH!")
