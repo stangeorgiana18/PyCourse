@@ -70,12 +70,13 @@ print(bottom_card) # Ace of Clubs
 
 for card_object in new_deck.all_cards:
     print(card_object)
-
-new_deck.shuffle()
-print(new_deck.all_cards[-1]) # Six of Clubs for eg.
 '''
 
 new_deck = Deck()
+new_deck.shuffle()
+print(new_deck.all_cards[-1]) # Six of Clubs for eg.
+
+
 new_deck.shuffle()
 mycard = new_deck.deal_one()
 print(mycard) # Five of Diamonds
@@ -83,4 +84,40 @@ print(len(new_deck.all_cards)) # 51 now
 
 
 
+
 # player 
+
+class Player:
+
+    def __init__(self, name):
+        self.name = name
+        self.all_cards = [] # empty hand for each player 
+
+    def remove_one(self):
+        return self.all_cards.pop(0)
+
+    def add_cards(self, new_cards):
+        if type(new_cards) == type([]):
+            # list of multiple card objects
+            self.all_cards.extend(new_cards)
+        else:
+            # for a single card object
+            self.all_cards.append(new_cards)
+    
+    def __str__(self):
+        return f"Player {self.name} has {len(self.all_cards)} cards."
+
+
+new_player = Player("Geo")
+print(new_player)
+
+new_player.add_cards(mycard)
+
+print(new_player) # Player Geo has 1 cards.
+print(new_player.all_cards[0]) # Two of Clubs
+
+new_player.add_cards([mycard, mycard, mycard])
+print(new_player) # Player Geo has 4 cards.
+new_player.remove_one()
+print(new_player) # Player Geo has 3 cards.
+
