@@ -52,6 +52,75 @@ def cool():
 
 some_func = cool()
 
-print(some_func())
+print(some_func(), '\n')
+
 
 # calling functions within another function
+
+def hello():
+    return 'Hi, Geo!'
+
+
+def other(some_def_func):
+    print('Other code runs here!')
+
+    # passing a function as an argument 
+    print(some_def_func())
+
+other(hello)
+print('\n')
+
+# hello when it's passed in as raw function
+# hello() when it's executed --> 'Hi, Geo!'
+
+
+########################
+# CREATE A NEW DECORATOR
+########################
+
+def new_decorator(original_func):
+
+    # the extra functionality you want to decorate the original function with
+    def wrap_func():
+        print("Some extra code, before the original func.")
+
+        original_func()
+
+        print("Some extra code after the original func.")
+
+    return wrap_func
+
+# idea behind: a present with wrapping paper
+# the original function is the present 
+# put into a box and wrap around it --> decoration (the code before/after the original())
+
+def func_needs_decorator():
+    print("I want to be decorated!")
+
+
+func_needs_decorator()
+print('\n')
+
+decorated_func = new_decorator(func_needs_decorator)
+
+print(decorated_func(), '\n')
+
+
+# create a new decorator using special syntax @
+# pass the function below into the @function as an argument
+
+@new_decorator
+def func_needs_decorator():
+    print("I want to be decorated!")
+
+func_needs_decorator()
+
+# decorators -- commonly used in web frameworks: Django, Flask
+# usually used to render a new website or point to another page
+
+# Flask -- used to create web pages in Python
+# decorators are highly integrated in the way the framework works
+
+# Django -- more heavy-duty and popular web framework for Python
+
+
