@@ -30,11 +30,28 @@ def hello(name = "Geo"):
     def welcome():
         return '\t This is welcome() inside hello.'
     
-    print(greet())
-    print(welcome())
-    print("This is the end of the hello function!")
+    
+    print("I am going to return a function!")
 
+    # this would allow assiging a function to a variable
+    if name == "Geo":
+        return greet
+    else:
+        return welcome
 
-hello()
+ 
+my_new_func = hello("Geo") # pointed to the greet function inside hello
+print(my_new_func())
+
+def cool():
+
+    def super_cool():
+        return "I am very cool!"
+    
+    return super_cool
+
+some_func = cool()
+
+print(some_func())
 
 # calling functions within another function
