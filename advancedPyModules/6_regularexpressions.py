@@ -123,3 +123,98 @@ print(results.group(2))
 
 # COMPILE -- extract parts of information while looking for a complete match
 
+print('\n')
+
+
+# OR OPERATOR TO SEARCH FOR MULTIPLE TERMS 
+
+# the pipe operator to look for cat or dog in the string
+result = re.search(r'cat|dog', 'The dog is here')
+print(result)
+
+
+# WILD CARD OPERATOR AS A PLACEMENT THAT WILL MATCH ANY CHARACTER PLACED THERE
+matches = re.findall(r'at', 'The cat in the hat sat there.')
+print(matches) # ['at', 'at', 'at']
+
+# grab the letter in front of at 
+letter_in_front = re.findall(r'.at', 'The cat in the hat sat there.')
+print(letter_in_front) # ['cat', 'hat', 'sat']
+
+# more wild card characters 
+# for more control, use the character idenfiers 
+more_wildchar = re.findall(r'...at', 'The cat in the hat went splat.')
+print(more_wildchar) # ['e cat', 'e hat', 'splat']
+
+
+# STARTS WITH: ^
+
+# the string I'm searching through starts with a number
+# it searches in the entire text itself
+result = re.findall(r'^\d', '1 is a number')
+print(result) # ['1']
+
+result = re.findall(r'^\d', 'The 2 is a number')
+print(result) # []
+
+
+# ENDS WITH: $
+result = re.findall(r'\d$', 'The 2 is a number')
+print(result) # []
+
+result = re.findall(r'\d$', 'The number is 2')
+print(result, '\n') # ['2']
+
+
+
+# EXCLUSION of characters 
+
+phrase = 'there are 3 numbers 34 inside 5 this sentence'
+
+# get back everything that isn't a number in the sentence: r'[^\thingstoexclude]
+# exclude any digits
+pattern = r'[^\d]'
+print(re.findall(pattern, phrase)) # list of every single non-number character
+
+# to get the words back together:
+pattern = r'[^\d]+'  # ['there are ', ' numbers ', ' inside ', ' this sentence']
+print(re.findall(pattern, phrase))
+
+
+# get rid of PUNCTUATION from a sentence 
+test_phrase = 'This is a string! But it has punctuation. How can we remove it?'
+print(re.findall(r'[^!.?]+', test_phrase)) # ['This is a string', ' But it has punctuation', ' How can we remove it']
+
+# also remove the spaces:
+test_phrase = 'This is a string! But it has punctuation. How can we remove it?'
+clean = re.findall(r'[^!.? ]+', test_phrase)
+print(clean) # get a list with all the words
+
+print(' '.join(clean), '\n') # join the words: This is a string But it has punctuation How can we remove it
+
+
+# GROUPING FOR INCLUSION
+
+text = "Only find the hyphen-word in this sentence. But you do not know how long-ish they are."
+pattern = r'[\w]+' # look for a group of alphanumerics
+result = re.findall(pattern, text)
+print(result) # ['Only', 'find', 'the', 'hyphen', 'word', 'in', 'this', 'sentence', 'But', 'you', 'do', 'not', 'know', 'how', 'long', 'ish', 'they', 'are']
+
+
+# look for hyphenated words 
+pattern = r'[\w]+-[\w]+' # one group of alphn occuring one or more times x 2
+result = re.findall(pattern, text)
+print(result) # ['hyphen-word', 'long-ish']
+
+# this can also be written like that: r'\w+-\w+'
+# braces may be useful to keep the grouping syntax: [\w]+-[\w\d]+ 
+
+
+# PARANTHESES FOR MULTIPLE OPTIONS
+
+text = 'Hello, would you like some catfish?'
+texttwo = "Hello, would you like to take a catnap?"
+textthree = "Hello, have you seen this caterpillar?"
+
+result = re.search(r'cat(fish|nap|erpillar)', textthree)
+print(result) # <re.Match object; span=(26, 37), match='caterpillar'>
