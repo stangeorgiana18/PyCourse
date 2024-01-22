@@ -74,3 +74,52 @@ for match in re.finditer('phone', text):
     print(match.group())
 # phone
 # phone
+
+print('\n')
+
+# building actual patterns with identifier syntax
+
+# CHARACTER IDENTIFIERS
+# \d -- digit -- file_\d\d
+# \w -- alphanumeric -- \w-\w\w\w -- A-b_1 -- alphanumeric also include _
+# \s -- white space -- a\sb\sc -- a b c 
+# \D -- a non digit -- \D\D\D -- ABC
+# \W -- non-alphanumeric -- *-+=)
+# \S -- non-whitespace -- Yoyo
+    
+text = 'My phone number is 304-082-2344'
+phone = re.search(r'\d\d\d-\d\d\d-\d\d\d\d', text) # use r in front of the string bcs the / are not escape slashes
+print(phone)
+
+# RETURN THE ACTUAL PEACE OF STRING THAT MATCHES
+print(phone.group(), '\n')
+
+
+# use of QUANTIFIERS to indicate repetition of the same character 
+
+# * -- occurs zero or more times -- A*B*C* -- eg. AAACC
+# ? -- once or none  -- plurals? -- eg. plural
+
+phone = re.search(r'\d{3}-\d{3}-\d{4}', text)
+print(phone)
+
+
+# extract the area code of the phone number 
+# compile -- compiles together diff expression pattern codes 
+# () -- indicate groups of the pattern
+# with compile you can call the groupings individually
+
+
+phone_pattern = re.compile(r'(\d{3})-(\d{3})-(\d{4})')
+results = re.search(phone_pattern, text)
+
+print(results.group())
+
+# call by group position
+# index starts at 1
+print(results.group(1)) # 304
+
+print(results.group(2))
+
+# COMPILE -- extract parts of information while looking for a complete match
+
