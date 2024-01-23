@@ -1,4 +1,4 @@
-# eg. search for a pattern strcuture of a string you're looking for 
+# eg. search for a pattern structure of a string you're looking for 
 # like an email of phone number 
 
 # regex -- regular expressions -- allow us to search fot general patterns in text data
@@ -6,7 +6,7 @@
 # re library creates specialised pattern strings and searches for patterns within text 
 # primary skillset for regex -- understanding the special syntax for these pattern strings
 
-# covert what you're looking for into specialised pattern syntax 
+# convert what you're looking for into specialised pattern syntax 
 # and you can look up the necessary patterns, quantifiers, identifiers that you need
 
 # backslashes correspond to unique identifiers 
