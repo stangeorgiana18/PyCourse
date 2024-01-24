@@ -61,3 +61,45 @@ print(first_item.text, '\n')
 for item in soup.select('.vector-toc-text'):
     print(item.text)
 
+print('\n')
+
+
+# GRABBING AN IMAGE
+
+res = requests.get('https://en.wikipedia.org/wiki/Deep_Blue_(chess_computer)')
+soup = bs4.BeautifulSoup(res.text, 'lxml')
+
+#print(soup)
+
+print(soup.select('img'), '\n') # --> list with img elements
+
+print(soup.select('img')[3])
+print('\n')
+
+print(soup.select('.mw-file-element'))
+print('\n')
+
+computer = soup.select('.mw-file-element')[1]
+print(computer)
+
+# we can treat computer almost as a dictionary 
+# you can do a call like a dictionary
+
+print(computer['class']) # ['mw-file-element']
+
+print(computer['src'])
+
+
+# make a new request specifically for this url
+image_link = requests.get("https://upload.wikimedia.org/wikipedia/commons/thumb/b/be/Deep_Blue.jpg/220px-Deep_Blue.jpg")
+
+# this has a content attribute -- the raw content of the actual image 
+print(image_link.content) # binary file
+
+# wb - write binary -- bcs we have a binary repres of the image
+# OR f = open('path/my_computer_image.jpg, 'wb')
+f = open('my_computer_image.jpg', 'wb')
+
+f.write(image_link.content)
+
+f.close()
