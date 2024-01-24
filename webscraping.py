@@ -39,7 +39,25 @@ print(type(site_paragraphs[0])) # <class 'bs4.element.Tag'>
 # not a string, but a bs object, so I can use getText()
 
 print(site_paragraphs[0].getText()) # first paragraph
+print('\n')
 
 
 # GRABBING ALL ELEMENTS OF A CLASS 
+
+# all the strings in the table of contents 
+# ability: to inspect a particular element on a page and grab an associated class
+
+res = requests.get('https://en.wikipedia.org/wiki/Tuna')
+soup = bs4.BeautifulSoup(res.text, 'lxml')
+
+#print(soup)
+
+print(soup.select('.vector-toc-text'))
+first_item = soup.select('.vector-toc-text')[0]
+print(first_item) # <div class="vector-toc-text">(Top)</div>
+
+print(first_item.text, '\n')
+
+for item in soup.select('.vector-toc-text'):
+    print(item.text)
 
