@@ -12,7 +12,7 @@ print(mac.filename)
 print(mac.format_description) # JPEG (ISO 10918)
 
 # CROPPING IMAGES 
-#mac.crop((0,0, 100, 100)).show()
+mac.crop((0,0, 100, 100)).show()
 
 pencils = Image.open('pencils.jpg')
 print(pencils.size) # (1950, 1300)
@@ -26,7 +26,7 @@ y = 0
 w = 1905 / 3 # width
 h = 1300 / 10
 
-#pencils.crop((x, y, w, h)).show()
+pencils.crop((x, y, w, h)).show()
 
 # start point: (x, y)
 
@@ -37,7 +37,7 @@ y = 1100 # y starts at 1100
 w = 1950 / 3
 h = 1300
 
-#pencils.crop((x, y, w, h)).show()
+pencils.crop((x, y, w, h)).show()
 
 # grab the computer itself from the mac photo
 
@@ -48,24 +48,27 @@ w = halfway + 200
 y = 800
 h = 1257
 
-#mac.crop((x, y, w, h)).show()
+mac.crop((x, y, w, h)).show()
+
 
 # CREATE A COPY to the top left corner
 computer = mac.crop((x, y, w, h))
 mac.paste(im = computer, box = (0, 0)) # (what to go, where)
 
-#mac.show()
+mac.show()
 
 mac.paste(im = computer, box = (796, 0)) 
 #mac.show() # the variable is permanently affected, but not the image
 
 
-#mac.resize((3000, 500)).show()
+mac.resize((3000, 500)).show()
+
 
 # rotate the image by 90 degrees
-#mac.rotate(90).show()
+mac.rotate(90).show()
 
 print('\n')
+
 
 # COLOR TRANSPARENCY
 
@@ -97,20 +100,21 @@ purple = Image.open("purple.png")
 # IMAGE EXERCISE
 
 # stack images on top of each other, work with transparency, resizing images
-word_matrix = Image.open('word_matrix.png')
+words = Image.open('word_matrix.png')
 mask = Image.open('mask.png')
 
-print(word_matrix.size) # (1015, 559)
+print(words.size) # (1015, 559)
 print(mask.size) # (505, 251)
 
-resize_word_matrix = word_matrix.resize((505, 251))
-resize_word_matrix.show()
+# enlarge the mask to the size of the word matrix
+mask = mask.resize((1015, 559))
+print(mask.size)
 
-mask.putalpha(100)
+mask.putalpha(150)
 #mask.show()
 
-resize_word_matrix.paste(im = mask, box = (0, 0), mask = mask)
-resize_word_matrix.save("secret_words.png")
+words.paste(im = mask, box = (0, 0), mask = mask)
+words.save("secret_words.png")
 secret_words = Image.open('secret_words.png')
 secret_words.show()
 
