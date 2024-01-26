@@ -92,3 +92,25 @@ blue.save("purple.png")
 purple = Image.open("purple.png")
 #purple.show()
 
+
+
+# IMAGE EXERCISE
+
+# stack images on top of each other, work with transparency, resizing images
+word_matrix = Image.open('word_matrix.png')
+mask = Image.open('mask.png')
+
+print(word_matrix.size) # (1015, 559)
+print(mask.size) # (505, 251)
+
+resize_word_matrix = word_matrix.resize((505, 251))
+resize_word_matrix.show()
+
+mask.putalpha(100)
+#mask.show()
+
+resize_word_matrix.paste(im = mask, box = (0, 0), mask = mask)
+resize_word_matrix.save("secret_words.png")
+secret_words = Image.open('secret_words.png')
+secret_words.show()
+
