@@ -106,6 +106,79 @@ csv_writer = csv.writer(f)
 print(csv_writer.writerow(['1', '2', '3'])) # print the number of characters written
 # also the commas and the newline is counted --> 7
 
+print('\n')
+
 f.close()
 
+
+# PDF FILES -- portable document format
+# no machine readable standard format
+
+import PyPDF2
+
+# opne the file and attach a reader object to it
+# rb -- read binary since it's not a normal text file
+f = open('Working_Business_Proposal.pdf', 'rb') 
+
+# to make sure we can work with this:
+pdf_reader = PyPDF2.PdfReader(f)
+
+# number of pages
+print(len(pdf_reader.pages)) # 5
+
+# index 0 for page 1
+page_one = pdf_reader.pages[0]
+page_one_text = page_one.extract_text()
+
+print(page_one_text)
+# empty string -- pdf file not compatible with PyPDF2; use another library
+
+# then you can use regex to searcg for a particular pattern
+
+f.close()
+
+
+# WRITE ANOTHER PDF PAGE  
+# we cannot write text in the middle of a page with PyPDF2
+# PDFs are not designed to be easily editable
+
+# ADD PAGES TO PDF
+f = open('Working_Business_Proposal.pdf', 'rb')
+pdf_reader = PyPDF2.PdfReader(f)
+first_page = pdf_reader.pages[0]
+
+# grab pages by writing them to a new file
+# create a writer object
+pdf_writer = PyPDF2.PdfWriter() 
+
+print(type(first_page)) # <class 'PyPDF2._page.PageObject'>
+
+# the page added should be already of specialised file type
+# it shouldn't just be a raw py string
+pdf_writer.add_page(first_page)
+
+# open a new file and write to it
+pdf_output = open('Some_BrandNew_Doc.pdf', 'wb')
+pdf_writer.write(pdf_output)
+f.close()
+pdf_output.close()
+
+print('\n')
+
+
+# add all the text that exists within a PDF file
+f = open('Working_Business_Proposal.pdf', 'rb')
+
+# the index of the list corresponds to the page number 
+# so I'll have one large string per position in this list
+pdf_text = []
+pdf_reader = PyPDF2.PdfReader(f)
+
+for num in range(len(pdf_reader.pages)):
+
+    page = pdf_reader.pages[num]
+
+    pdf_text.append(page.extract_text())
+
+print(pdf_text[0])
 
