@@ -195,12 +195,37 @@ data_lines = list(csv_data) # list of lists
 #print(data_lines)
 print(len(data_lines)) # 66 -- number of rows 
 
+
 link = ''
+
+'''
 for i in range(len(data_lines)):
     link += data_lines[i][i]
 
+'''
+
+
+
+'''
+link_list = []
+for row_num,data in enumerate(data_lines):
+    link_list.append(data[row_num])
+''.join(link_list)
+
+'''
+
+
+# data is the row 
+# row_number -- current number of the row we're on
+for row_num, data in enumerate(data_lines):
+
+    link += data[row_num]
+
 print(link)
 
+
+'''
+# this did not work - invalid pdf format 
 import requests
 
 pdf_response = requests.get(link)
@@ -209,5 +234,52 @@ pdf_content = pdf_response.content
 # write the binary content to a local pdf file
 with open('downloaded_pdf.pdf', 'wb') as pdf_file:
     pdf_file.write(pdf_content)
+
+'''
+
+# download the pdf from the link 
+# grab the phone number from the pdf without knowing its format
+
+f = open('Find_the_Phone_Number.pdf', 'rb')
+pdf = PyPDF2.PdfReader(f)
+print(len(pdf.pages)) # 17
+
+import re
+
+pattern = r'\d{3}'
+    
+all_text = ''
+
+for n in range(len(pdf.pages)):
+
+    page = pdf.pages[n]
+    page_text = page.extract_text()
+
+    all_text += ' ' + page_text
+
+#print(all_text) # string with all the text
+    
+print(re.findall(pattern, all_text)) 
+# ['000', '000', '000', '505', '503', '445']
+# returns a list of matching objects
+
+# the iteration will return the match objects
+for match in re.finditer(pattern, all_text):
+    print(match)
+
+
+'''
+<re.Match object; span=(650, 653), match='000'>
+<re.Match object; span=(18270, 18273), match='000'>
+<re.Match object; span=(35890, 35893), match='000'>
+<re.Match object; span=(42919, 42922), match='505'>
+<re.Match object; span=(42923, 42926), match='503'>
+<re.Match object; span=(42927, 42930), match='445'>
+
+# we can see the actual location of the numbers 
+'''
+
+print(all_text[42919 : 42919 + 20]) # 505.503.4455. So hor
+print(all_text[42900 : 42919 + 20]) # phone number is 505.503.4455. So hor
 
 
