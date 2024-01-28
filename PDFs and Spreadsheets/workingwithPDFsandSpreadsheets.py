@@ -246,7 +246,7 @@ print(len(pdf.pages)) # 17
 
 import re
 
-pattern = r'\d{3}'
+pattern = r'\d{3}.\d{3}.\d{4}'
     
 all_text = ''
 
@@ -282,4 +282,24 @@ for match in re.finditer(pattern, all_text):
 print(all_text[42919 : 42919 + 20]) # 505.503.4455. So hor
 print(all_text[42900 : 42919 + 20]) # phone number is 505.503.4455. So hor
 
+for match in re.finditer(pattern, all_text):
+    print(match)
 
+# <re.Match object; span=(42919, 42931), match='505.503.4455'>
+    
+
+
+# OR
+    
+pattern = r'\d{3}.\d{3}.\d{4}'
+
+for n in range(len(pdf.pages)):
+        
+    page  = pdf.pages[n]
+    page_text = page.extract_text()
+    match = re.search(pattern, page_text)
+    
+    if match:
+        print(match.group())
+
+# 505.503.4455
