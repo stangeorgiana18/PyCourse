@@ -61,7 +61,7 @@ print(data_lines[10])
 # extract a single value / the email
 print(data_lines[10][3])
 
-# extract an entire columns
+# extract an entire column
 all_emails = []
 for line in data_lines[1:15]:
     all_emails.append(line[3])
@@ -181,4 +181,33 @@ for num in range(len(pdf_reader.pages)):
     pdf_text.append(page.extract_text())
 
 print(pdf_text[0])
+
+print('\n')
+
+
+# PDF and CSV PUZZLE EXERCISE
+
+# EXTRACT the Google Drive link from the .csv file
+# Hint: It's along the diagonal from top left to bottom right
+data = open('find_the_link.csv') 
+csv_data = csv.reader(data)
+data_lines = list(csv_data) # list of lists
+#print(data_lines)
+print(len(data_lines)) # 66 -- number of rows 
+
+link = ''
+for i in range(len(data_lines)):
+    link += data_lines[i][i]
+
+print(link)
+
+import requests
+
+pdf_response = requests.get(link)
+pdf_content = pdf_response.content
+
+# write the binary content to a local pdf file
+with open('downloaded_pdf.pdf', 'wb') as pdf_file:
+    pdf_file.write(pdf_content)
+
 
