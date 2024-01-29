@@ -58,3 +58,28 @@ password = getpass.getpass("Password: ")
 
 print(M.login(email, password)) # ('OK', [b'georgistan18@gmail.com authenticated (Success)'])
 
+# everything you can check in your particular email:
+print(M.list())
+
+# ('OK', [b'(\\HasNoChildren) "/" "INBOX"', b'(\\HasNoChildren) "/" "Notes"', b'(\\HasChildren \\Noselect) "/" "[Gmail]"', b'(\\All \\HasNoChildren) "/" "[Gmail]/All Mail"', b'(\\HasNoChildren \\Trash) "/" "[Gmail]/Bin"', b'(\\Drafts \\HasNoChildren) "/" "[Gmail]/Drafts"', b'(\\HasNoChildren \\Important) "/" "[Gmail]/Important"', b'(\\HasNoChildren \\Sent) "/" "[Gmail]/Sent Mail"', b'(\\HasNoChildren \\Junk) "/" "[Gmail]/Spam"', b'(\\Flagged \\HasNoChildren) "/" "[Gmail]/Starred"'])
+
+print(M.select('inbox')) # ('OK', [b'11716'])
+
+
+# after logging in, search our inbox; keywords capitalized
+
+typ, data = M.search(None, 'SUBJECT "esti misto fata"')
+
+print(typ) # OK
+print(data, '\n') # [b'11716']; if no number returned, no message found; more numbers -- more messages related 
+
+
+# the id above references the actual email
+# to get the email itself we need to fetch the actual data
+
+email_id = data[0]
+
+result, email_data = M.fetch(email_id, '(RFC822)' ) # second argument -- protocol
+
+print(email_data)
+
