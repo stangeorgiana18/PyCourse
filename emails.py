@@ -47,6 +47,7 @@ smtp_object.quit()
 
 '''
 
+
 import imaplib
 
 M = imaplib.IMAP4_SSL('imap.gmail.com')
@@ -69,6 +70,8 @@ print(M.select('inbox')) # ('OK', [b'11716'])
 # after logging in, search our inbox; keywords capitalized
 
 typ, data = M.search(None, 'SUBJECT "esti misto fata"')
+# the data is just a list of email IDs that you need to fetch
+
 
 print(typ) # OK
 print(data, '\n') # [b'11716']; if no number returned, no message found; more numbers -- more messages related 
@@ -83,3 +86,30 @@ result, email_data = M.fetch(email_id, '(RFC822)' ) # second argument -- protoco
 
 print(email_data)
 
+# grab the message itself
+# index for it: ;  you may need to play around for this; in this case it's [0][1]
+raw_email = email_data[0][1]
+raw_email_string = raw_email.decode('utf-8') # decode in case of symbols
+
+
+import email # to grab the actual message from the string
+
+email_message = email.message_from_string(raw_email_string)
+
+# email_message is an iterator
+
+for part in email_message.walk():
+
+    if part.get_content_type() == 'text/plain': # common: text/html if there's a linke inside of the email
+        body = part.get_payload(decode = True)
+        print(body) 
+        
+        # b'pe bune ca esti misto\r\n'
+
+    # complicated bcs of going through that rostering email message and trying to 
+    # get rid of all the other info that came in through the email data
+        
+ 
+
+# if dealing with emails that look the same every time (maybe from an API service)
+# it'd make sense to not use the actual email library and use a script
