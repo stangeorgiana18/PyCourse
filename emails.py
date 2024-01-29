@@ -2,7 +2,7 @@
 
 # SMTP - simple mail transfer protocol server
 # domain name that you connect to to access your email programmatically
-'''
+
 import smtplib
 
 # port number: 465 / 587 / no number 
@@ -45,7 +45,7 @@ print(smtp_object.sendmail(from_address, to_address, msg))
 # close the connection
 smtp_object.quit()
 
-'''
+
 
 
 import imaplib
