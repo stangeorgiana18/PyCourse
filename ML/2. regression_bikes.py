@@ -116,13 +116,94 @@ history = temp_nn_model.fit(
 #plot_loss(history) # values are converging 
 
 # here using backpropagation to train a neural node
-plt.scatter(X_train_temp, y_train_temp, label="Data", color="blue")
-x = tf.linspace(-20, 40, 100)
-plt.plot(x, temp_reg.predict(np.array(x).reshape(-1, 1)), label="Fit", color="red", linewidth=3)
+# plt.scatter(X_train_temp, y_train_temp, label="Data", color="blue")
+# x = tf.linspace(-20, 40, 100)
+# plt.plot(x, temp_reg.predict(np.array(x).reshape(-1, 1)), label="Fit", color="red", linewidth=3)
+# plt.legend()
+# plt.title("Bikes vs Temp")
+# plt.ylabel("Number of bikes")
+# plt.xlabel("Temp")
+# plt.show()
+
+# ### NEURAL NET
+
+temp_normalizer = tf.keras.layers.Normalization(input_shape=(1,), axis=None)
+temp_normalizer.adapt(X_train_temp.reshape(-1))
+
+nn_model = tf.keras.Sequential([
+    temp_normalizer,
+    tf.keras.layers.Dense(32, activation='relu'),
+    tf.keras.layers.Dense(32, activation='relu'),
+    tf.keras.layers.Dense(1, activation='relu'),  # final output - one answer/cell, relu = 1 because we cannot have less than 0 bikes
+])
+
+nn_model.compile(optimizer = tf.keras.optimizers.legacy.Adam(learning_rate = 0.001), loss = 'mean_squared_error')
+
+history = nn_model.fit(
+    X_train_temp, y_train_temp,
+    validation_data = (X_val_temp, y_val_temp),
+    verbose = 0, epochs = 100
+)
+
+#plot_loss(history)
+
+# plt.scatter(X_train_temp, y_train_temp, label="Data", color="blue")
+# x = tf.linspace(-20, 40, 100)
+# plt.plot(x, nn_model.predict(np.array(x).reshape(-1, 1)), label="Fit", color="red", linewidth=3)
+# plt.legend()
+# plt.title("Bikes vs Temp")
+# plt.ylabel("Number of bikes")
+# plt.xlabel("Temp")
+# plt.show()
+
+all_normalizer = tf.keras.layers.Normalization(input_shape=(6,), axis=-1)
+all_normalizer.adapt(X_train_all)
+
+nn_model = tf.keras.Sequential([
+    all_normalizer,
+    tf.keras.layers.Dense(32, activation='relu'),
+    tf.keras.layers.Dense(32, activation='relu'),
+    tf.keras.layers.Dense(1)
+])
+
+nn_model.compile(optimizer=tf.keras.optimizers.legacy.Adam(learning_rate=0.001), loss='mean_squared_error')
+
+history = nn_model.fit(
+    X_train_all, y_train_all,
+    validation_data = (X_val_all, y_val_all),
+    verbose = 0, epochs = 100
+)
+
+#plot_loss(history) # curves decreasing 
+
+# print(all_reg.score(X_test_all, y_test_all))
+# print(all_reg.predict(X_test_all))
+
+# calculate the MSE for both linear reg and nn
+y_pred_lr = all_reg.predict(X_test_all)
+y_pred_nn = nn_model.predict(X_test_all)
+
+def MSE(y_pred, y_real):
+      return (np.square(y_pred - y_real)).mean()
+
+# print(MSE(y_pred_lr, y_test_all))
+# print(MSE(y_pred_nn, y_test_all)) # nn results have a larger mse the lr 
+
+# plot the real results vs the predictions
+
+ax = plt.axes(aspect = 'equal')
+plt.scatter(y_test_all, y_pred_lr, label = 'Lin Reg Preds')
+plt.scatter(y_test_all, y_pred_nn, label = 'NN Preds')
+plt.xlabel('True Values')
+plt.ylabel("Predictions")
+lims = [0, 1800]
+plt.xlim(lims)
+plt.ylim(lims)
 plt.legend()
-plt.title("Bikes vs Temp")
-plt.ylabel("Number of bikes")
-plt.xlabel("Temp")
+_ = plt.plot(lims, lims, c = 'red')
 plt.show()
 
+# notice that for the nn, for the larger values, it seems more spread out 
+# and we tend to underestimate in the area below the diag
 
+ 
