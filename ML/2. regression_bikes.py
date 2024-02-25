@@ -24,12 +24,12 @@ df = df.drop(['hour'], axis = 1)
 
 print(df.head())
 
-for label in df.columns[1: ]:
-    plt.scatter(df[label], df['bike_count'])
-    plt.title(label)
-    plt.ylabel('Bike Count at Noon')
-    plt.xlabel(label)
-    plt.show()
+# for label in df.columns[1: ]:
+#     plt.scatter(df[label], df['bike_count'])
+#     plt.title(label)
+#     plt.ylabel('Bike Count at Noon')
+#     plt.xlabel(label)
+#     plt.show()
 
 df = df.drop(['wind', 'visibility', 'functional'], axis = 1)
 
@@ -46,7 +46,7 @@ def get_xy(dataframe, y_label, x_labels = None):  # x_labels is optional and def
         if len(x_labels) == 1:  # if there's only one feature, select it and reshape it 
             X = dataframe[x_labels[0]].values.reshape(-1, 1)  # make this 2D
         else:  # if multiple features, select those to be 2D with a single column, to prepare for horizontal stacking 
-            X = dataframe[x_labels].values.reshape(-1, 1) # make it 2D for the hstack
+            X = dataframe[x_labels].values # remove the unnecessary reshape
 
     y = dataframe[y_label].values.reshape(-1, 1)
     data = np.hstack((X, y)) # contains both features and the target variable
@@ -63,7 +63,7 @@ temp_reg = LinearRegression()
 temp_reg.fit(X_train_temp, y_train_temp)
 
 #print(temp_reg.coef_, temp_reg.intercept_)
-print(temp_reg.score(X_test_temp, y_test_temp)) # 0.34 -- better than 0; the higher the number, the higher the chance the 2 var would be correlated
+#print(temp_reg.score(X_test_temp, y_test_temp)) # 0.34 -- better than 0; the higher the number, the higher the chance the 2 var would be correlated
 
 plt.scatter(X_train_temp, y_train_temp, label="Data", color="blue")
 x = tf.linspace(-20, 40, 100)
@@ -84,4 +84,4 @@ _, X_test_all, y_test_all = get_xy(test, "bike_count", x_labels=df.columns[1:])
 all_reg = LinearRegression()
 all_reg.fit(X_train_all, y_train_all)
 
-print(all_reg.score(X_test_all, y_test_all))
+print(all_reg.score(X_test_all, y_test_all)) # this is improved 
