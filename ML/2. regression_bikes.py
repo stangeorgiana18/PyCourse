@@ -65,15 +65,15 @@ temp_reg.fit(X_train_temp, y_train_temp)
 #print(temp_reg.coef_, temp_reg.intercept_)
 #print(temp_reg.score(X_test_temp, y_test_temp)) # 0.34 -- better than 0; the higher the number, the higher the chance the 2 var would be correlated
 
-plt.scatter(X_train_temp, y_train_temp, label="Data", color="blue")
-x = tf.linspace(-20, 40, 100)
-x_values = np.array(x) # convert tensorflow to numpy array
-plt.plot(x_values, temp_reg.predict(x_values.reshape(-1, 1)), label="Fit", color="red", linewidth=3)
-plt.legend()
-plt.title("Bikes vs Temp")
-plt.ylabel("Number of bikes")
-plt.xlabel("Temp")
-#plt.show()
+# plt.scatter(X_train_temp, y_train_temp, label="Data", color="blue")
+# x = tf.linspace(-20, 40, 100)
+# x_values = np.array(x) # convert tensorflow to numpy array
+# plt.plot(x_values, temp_reg.predict(x_values.reshape(-1, 1)), label="Fit", color="red", linewidth=3)
+# plt.legend()
+# plt.title("Bikes vs Temp")
+# plt.ylabel("Number of bikes")
+# plt.xlabel("Temp")
+# plt.show()
 
 ### MULTIPLE LINEAR REGRESSION
 
@@ -84,4 +84,45 @@ _, X_test_all, y_test_all = get_xy(test, "bike_count", x_labels=df.columns[1:])
 all_reg = LinearRegression()
 all_reg.fit(X_train_all, y_train_all)
 
-print(all_reg.score(X_test_all, y_test_all)) # this is improved 
+#print(all_reg.score(X_test_all, y_test_all)) # this is improved 
+
+# Regression with Neural Net
+
+def plot_loss(history):
+    plt.plot(history.history['loss'], label='loss')
+    plt.plot(history.history['val_loss'], label='val_loss')
+    plt.xlabel('Epoch')
+    plt.ylabel('MSE')
+    plt.legend()
+    plt.grid(True)
+    plt.show()
+
+temp_normalizer = tf.keras.layers.Normalization(input_shape = (1, ), axis = None)
+temp_normalizer.adapt(X_train_temp.reshape(-1))
+
+temp_nn_model = tf.keras.Sequential([
+    temp_normalizer, 
+    tf.keras.layers.Dense(1) # one single dense layer with 1 single unit 
+])
+
+temp_nn_model.compile(optimizer = tf.keras.optimizers.legacy.Adam(learning_rate = 0.1), loss = 'mean_squared_error')
+history = temp_nn_model.fit(
+    X_train_temp.reshape(-1), y_train_temp,
+    verbose = 0,
+    epochs = 1000,
+    validation_data = (X_val_temp, y_val_temp)
+)
+
+#plot_loss(history) # values are converging 
+
+# here using backpropagation to train a neural node
+plt.scatter(X_train_temp, y_train_temp, label="Data", color="blue")
+x = tf.linspace(-20, 40, 100)
+plt.plot(x, temp_reg.predict(np.array(x).reshape(-1, 1)), label="Fit", color="red", linewidth=3)
+plt.legend()
+plt.title("Bikes vs Temp")
+plt.ylabel("Number of bikes")
+plt.xlabel("Temp")
+plt.show()
+
+
